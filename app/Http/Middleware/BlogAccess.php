@@ -17,7 +17,21 @@ class BlogAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        // Your logic to check access
+        // Get the blog access setting
+        $blogAccess = \App\Models\Setting::get('blog_access', 'public');
+
+        // If blog is public, allow access
+        if ($blogAccess === 'public') {
+            return $next($request);
+        }
+
+        // If blog is members only and user is not logged in, redirect to login
+        if ($blogAccess === 'members_only' && !auth()->check()) {
+            return redirect()->route('login')
+                ->with('error', 'You need to log in to access the blog.');
+        }
+
+        // User is logged in, allow access
         return $next($request);
     }
 }

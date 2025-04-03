@@ -56,6 +56,26 @@
                         </label>
                     </div>
 
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700">Visibility</label>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center">
+                                <input id="visibility_public" name="visibility" type="radio" value="public" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" {{ $post->visibility === 'public' ? 'checked' : '' }}>
+                                <label for="visibility_public" class="ml-2 block text-sm text-gray-900">
+                                    Public
+                                    <p class="text-xs text-gray-500">Visible to everyone, including non-logged in visitors</p>
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="visibility_members_only" name="visibility" type="radio" value="members_only" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" {{ $post->visibility === 'members_only' ? 'checked' : '' }}>
+                                <label for="visibility_members_only" class="ml-2 block text-sm text-gray-900">
+                                    Members Only
+                                    <p class="text-xs text-gray-500">Only visible to logged-in users</p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="flex justify-end">
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                             Update Post

@@ -34,6 +34,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'visibility' => 'required|in:public,members_only',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
@@ -72,17 +73,10 @@ class PostController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'visibility' => 'required|in:public,members_only',
         ]);
 
-        // Debug the published status
-        $isPublished = $request->has('published');
-        \Log::info('Post publishing status:', [
-            'post_id' => $id,
-            'published_checkbox_checked' => $isPublished,
-            'request_all' => $request->all()
-        ]);
-
-        $validated['published'] = $isPublished;
+        $validated['published'] = $request->has('published');
 
         $post = Post::findOrFail($id);
         $post->update($validated);

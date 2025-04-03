@@ -35,7 +35,7 @@
 
             @auth
                 @if(Auth::user()->is_admin)
-                    <div class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4 mb-6 mx-auto max-w-7xl">
+                    <div class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4 mt-6 mb-6  max-w-xl">
                         <div class="flex">
                             <div class="flex-shrink-0">
                                 <svg class="h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

@@ -20,6 +20,7 @@ class Post extends Model
         'slug',
         'content',
         'published',
+        'visibility',
         'user_id',
     ];
 
@@ -52,5 +53,24 @@ class Post extends Model
                 $post->slug = \Str::slug($post->title);
             }
         });
+    }
+
+    /**
+     * Scope a query to only include posts visible to a user.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \App\Models\User|null  $user
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeVisibleTo($query, $user = null)
+    {
+        if ($user) {
+            // Logged in users can see all published posts
+            return $query->where('published', true);
+        } else {
+            // Guests can only see public posts
+            return $query->where('published', true)
+                         ->where('visibility', 'public');
+        }
     }
 }

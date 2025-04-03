@@ -12,8 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('published', true)
-            ->orderBy('created_at', 'desc')
+        $posts = Post::visibleTo(auth()->user())
+            ->latest()
             ->paginate(10);
 
         return view('posts.index', compact('posts'));
@@ -25,7 +25,7 @@ class PostController extends Controller
     public function show(string $slug)
     {
         $post = Post::where('slug', $slug)
-            ->where('published', true)
+            ->visibleTo(auth()->user())
             ->firstOrFail();
 
         return view('posts.show', compact('post'));
