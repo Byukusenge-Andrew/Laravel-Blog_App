@@ -1,0 +1,38 @@
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+body {
+    color: #333;
+    background: #f8f9fa;
+}
+
+.admin-sidebar {
+    background-color: #2d3748;
+    color: white;
+    min-height: calc(100vh - 64px);
+}
+
+.blog-post {
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 2rem;
+}
+
+.blog-title {
+    color: #1a202c;
+    font-weight: 700;
+}
+
+.blog-meta {
+    color: #718096;
+    font-size: 0.875rem;
+}
