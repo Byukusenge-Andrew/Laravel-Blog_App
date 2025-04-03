@@ -10,17 +10,16 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the posts.
+     * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-
+        $posts = Post::latest()->paginate(10);
         return view('admin.posts.index', compact('posts'));
     }
 
     /**
-     * Show the form for creating a new post.
+     * Show the form for creating a new resource.
      */
     public function create()
     {
@@ -28,7 +27,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created post in storage.
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
@@ -48,17 +47,27 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified post.
+     * Display the specified resource.
      */
-    public function edit(Post $post)
+    public function show(string $id)
     {
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $post = Post::findOrFail($id);
         return view('admin.posts.edit', compact('post'));
     }
 
     /**
-     * Update the specified post in storage.
+     * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, string $id)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -68,13 +77,14 @@ class PostController extends Controller
         // Debug the published status
         $isPublished = $request->has('published');
         \Log::info('Post publishing status:', [
-            'post_id' => $post->id,
+            'post_id' => $id,
             'published_checkbox_checked' => $isPublished,
             'request_all' => $request->all()
         ]);
 
         $validated['published'] = $isPublished;
 
+        $post = Post::findOrFail($id);
         $post->update($validated);
 
         return redirect()->route('admin.posts.index')
@@ -82,10 +92,11 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified post from storage.
+     * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(string $id)
     {
+        $post = Post::findOrFail($id);
         $post->delete();
 
         return redirect()->route('admin.posts.index')

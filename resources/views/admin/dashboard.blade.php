@@ -15,34 +15,39 @@
                             Manage Posts
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.settings.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700 {{ request()->routeIs('admin.settings.*') ? 'bg-gray-700' : '' }}">
+                            Settings
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
 
         <!-- Main Content -->
         <div class="flex-1 p-8">
-            <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+            <h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-xl font-semibold mb-4">Posts</h2>
+                    <h2 class="text-xl font-semibold mb-4">Blog Posts</h2>
                     <p class="text-3xl font-bold">{{ \App\Models\Post::count() }}</p>
-                    <p class="text-gray-600 mt-2">Total posts</p>
                     <div class="mt-4">
-                        <a href="{{ route('admin.posts.index') }}" class="text-blue-600 hover:underline">View all posts →</a>
+                        <a href="{{ route('admin.posts.index') }}" class="text-indigo-600 hover:text-indigo-800">Manage Posts →</a>
                     </div>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-xl font-semibold mb-4">Published</h2>
-                    <p class="text-3xl font-bold">{{ \App\Models\Post::where('published', true)->count() }}</p>
-                    <p class="text-gray-600 mt-2">Published posts</p>
+                    <h2 class="text-xl font-semibold mb-4">Users</h2>
+                    <p class="text-3xl font-bold">{{ \App\Models\User::count() }}</p>
                 </div>
 
                 <div class="bg-white rounded-lg shadow p-6">
-                    <h2 class="text-xl font-semibold mb-4">Drafts</h2>
-                    <p class="text-3xl font-bold">{{ \App\Models\Post::where('published', false)->count() }}</p>
-                    <p class="text-gray-600 mt-2">Draft posts</p>
+                    <h2 class="text-xl font-semibold mb-4">Blog Settings</h2>
+                    <p class="mb-4">Configure how your blog works</p>
+                    <div>
+                        <a href="{{ route('admin.settings.index') }}" class="text-indigo-600 hover:text-indigo-800">Manage Settings →</a>
+                    </div>
                 </div>
             </div>
 

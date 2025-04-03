@@ -6,6 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Andre.Blog') }}</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +21,7 @@
                     <div class="flex items-center">
                         <a href="{{ url('/') }}" class="flex items-center">
                             <x-application-logo class="block h-9 w-auto fill-current text-indigo-600" />
-                            <span class="ml-3 text-xl font-bold text-gray-900">{{ config('app.name', 'Andre.Blog') }}</span>
+                            <span class="ml-3 text-xl font-bold text-gray-900">Andre.Blog</span>
                         </a>
                         <nav class="hidden space-x-8 sm:ml-10 sm:flex">
                             <a href="{{ url('/') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('/') ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} text-sm font-medium">
@@ -70,11 +72,11 @@
 
         <footer class="bg-white border-t border-gray-200 py-8 mt-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="md:flex md:justify-between">
+                <!-- <div class="md:flex md:justify-between">
                     <div class="mb-8 md:mb-0">
                         <a href="{{ url('/') }}" class="flex items-center">
                             <x-application-logo class="block h-8 w-auto fill-current text-indigo-600" />
-                            <span class="ml-3 text-xl font-bold text-gray-900">{{ config('app.name', 'Laravel Blog') }}</span>
+                            <span class="ml-3 text-xl font-bold text-gray-900">Andre.Blog</span>
                         </a>
                         <p class="mt-4 text-gray-600 max-w-xs">
                             Share your thoughts and ideas with the world through our blogging platform.
@@ -82,13 +84,6 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Navigation</h3>
-                            <ul class="mt-4 space-y-2">
-                                <li><a href="{{ url('/') }}" class="text-gray-600 hover:text-indigo-600">Home</a></li>
-                                <li><a href="{{ route('posts.index') }}" class="text-gray-600 hover:text-indigo-600">Blog</a></li>
-                            </ul>
-                        </div>
 
                         <div>
                             <h3 class="text-sm font-semibold text-gray-900 tracking-wider uppercase">Account</h3>
@@ -105,11 +100,11 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="mt-8 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between">
                     <div class="text-center text-gray-500 text-sm">
-                        &copy; {{ date('Y') }} {{ config('app.name', 'Laravel Blog') }}. All rights reserved.
+                        &copy; {{ date('Y') }} Andre.Blog. All rights reserved.
                     </div>
                 </div>
             </div>

@@ -32,6 +32,35 @@
                     @endif
                 @endauth
             </div>
+
+            @auth
+                @if(Auth::user()->is_admin)
+                    <div class="bg-indigo-100 border-l-4 border-indigo-500 text-indigo-700 p-4 mb-6 mx-auto max-w-7xl">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm">
+                                    Blog access is currently set to: <strong>
+                                    @php
+                                        try {
+                                            $access = \App\Models\Setting::get('blog_access', 'public');
+                                            echo $access === 'public' ? 'Public' : 'Members Only';
+                                        } catch (\Exception $e) {
+                                            echo 'Public';
+                                        }
+                                    @endphp
+                                    </strong>
+                                    <a href="{{ route('admin.settings.index') }}" class="font-medium underline">Change settings</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endauth
         </div>
     </div>
 
@@ -94,7 +123,7 @@
             </div>
         </div>
     </div>
-
+ @guest
     <div class="bg-indigo-50 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
@@ -134,7 +163,7 @@
                 </div>
 
                 <div class="mt-10 lg:mt-0">
-                    @guest
+
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                             <div class="px-6 py-8 sm:p-10">
                                 <h3 class="text-2xl font-extrabold text-gray-900 text-center">Join Our Community</h3>
@@ -148,7 +177,13 @@
                                 </div>
                             </div>
                         </div>
-                    @else
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                             <div class="px-6 py-8 sm:p-10">
                                 <h3 class="text-2xl font-extrabold text-gray-900 text-center">Welcome Back!</h3>
@@ -160,9 +195,5 @@
                                 </div>
                             </div>
                         </div>
-                    @endguest
-                </div>
-            </div>
-        </div>
-    </div>
+    @endguest
 </x-app-layout>
